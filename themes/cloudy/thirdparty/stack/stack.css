@@ -1,0 +1,108 @@
+img.stack {
+    padding: 10px 10px 25px 10px;
+    border: 1px solid #fff;
+    background: #eeeeee;
+    -moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+
+    -moz-transition: all 0.2s ease;
+
+    -webkit-transition: all 0.2s ease;
+
+    -o-transition: all 0.2s ease;
+
+    transition: all 0.2s ease;
+}
+
+a.stack:hover img.photo1 {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+    cursor: pointer;
+}
+img.photo1{
+    z-index: 5;
+    -webkit-transform: rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+}
+img.photo2{
+    z-index: 1;
+    -webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
+    -o-transform: rotate(-3deg);
+    -ms-transform: rotate(-3deg);
+    transform: rotate(-3deg);
+}
+img.photo3{
+    z-index: 3;
+    -webkit-transform: rotate(4deg);
+    -moz-transform: rotate(4deg);
+    -o-transform: rotate(4deg);
+    -ms-transform: rotate(4deg);
+    transform: rotate(4deg);
+}
+
+/*
+.blah {
+    position: relative;
+    float: left;
+}
+
+ul.stack li {
+    list-style: none;
+    position: absolute;
+    padding: 10px 10px 25px 10px;
+    border: 1px solid #fff;
+    background: #eeeeee;
+    -moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+
+    -moz-transition: all 0.2s ease; */
+/* Firefox *//*
+
+    -webkit-transition: all 0.2s ease; */
+/* WebKit *//*
+
+    -o-transition: all 0.2s ease; */
+/* Opera *//*
+
+    transition: all 0.2s ease; */
+/* Standard *//*
+
+}
+
+a.stack:hover ul li.photo2 {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+    cursor: pointer;
+}
+ul.stack li.photo1{
+    z-index: 1;
+    -webkit-transform: rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+}
+ul.stack li.photo2{
+    z-index: 5;
+    -webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
+    -o-transform: rotate(-3deg);
+    -ms-transform: rotate(-3deg);
+    transform: rotate(-3deg);
+}
+ul.stack li.photo3{
+    z-index: 3;
+    -webkit-transform: rotate(4deg);
+    -moz-transform: rotate(4deg);
+    -o-transform: rotate(4deg);
+    -ms-transform: rotate(4deg);
+    transform: rotate(4deg);
+}*/
