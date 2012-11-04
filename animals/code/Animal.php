@@ -62,7 +62,6 @@ class Animal extends DataObject{
 		//$f->getValidator()->setAllowedExtentions(array('jpg','jpeg', 'png','gif'));
 		$fields->push($f);
 
-
 		//@TODO übersetzen plus evntl. bessere Lösung finden
 		$config = GridFieldConfig_RelationEditor::create();
 		$f = new GridField('OtherPics', 'Bilder der Galeries', $this->OtherPics(), $config);
