@@ -1,0 +1,19 @@
+de:
+  Animals:
+    NAME: 'Name'
+    AGE: 'Alter'
+    DESCRIPTION: 'Beschreibung'
+    CATEGORY: 'Kategorie'
+    GENDER: 'Geschlecht'
+    CONTACT: 'Kontakt'
+    MALE: 'Männlich'
+    FEMALE: 'Weiblich'
+    CREATEDBY: 'Erstellt von'
+    PERMISSION_CREATE_ANIMAL: 'Der Nutzer kann Tiere eintragen'
+    PROFILEPIC: 'Profilbild'
+  AnimalAdmin:
+    PERMISSION_CATEGORY: 'Rechte Tierverwaltung'
+    MENUTITLE: 'Tierverwaltung'
+  Category:
+    PERMISSION_CREATE_CATEGORY: 'Der Nutzer kann Kategorien anlegen'
+    NAME: 'Kategorie Name'
