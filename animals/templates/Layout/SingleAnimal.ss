@@ -16,7 +16,9 @@
                         <h2>$Name</h2>
                         <p><b>Alter:</b> $Age</p>
                         <p><b>Geschlecht:</b> $Gender</p>
+                        <p><b>Rasse:</b>$Race</p>
                         <p><b>Kontakt:</b> $Contact</p>
+
                     </div>
                 </div>
                 <div class="row">

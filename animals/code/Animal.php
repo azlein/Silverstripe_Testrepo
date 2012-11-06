@@ -12,28 +12,36 @@ class Animal extends DataObject{
 		'Name'=>'Varchar',
 		'Age'=>'Int',
 		'Gender'=>'Varchar',
-		'Description'=>'Text',
+		'Description'=>'HtmlText',
 		'Contact'=>'Text',
+		'Race'=>'Text'
+		//Farbe
 	);
+
 	static $has_one = array(
 		'Category'=>'Category',
 		'ProfilePic'=>'Image',
 		'Created_by'=>'Member'
 	);
+
 	static $many_many = array(
 		'OtherPics'=>'Image'
 	);
+
 	static $summary_fields = array(
 		'Name' => 'Animal Name',
-		'Age' => 'Alter',
+		'Age' => 'Age',
 		'Contact' => 'Contact',
 		'Category.Name' => 'Category',
+		'Race'=>'Race' ,
 		'Created_by.Surname' => 'Created by'
 	);
+
 	static $searchable_fields = array(
 		'Name',
 		'Category.Name',
 		'Contact',
+		'Race',
 		'Created_by.Surname'
 	);
 
@@ -45,6 +53,7 @@ class Animal extends DataObject{
         $labels['Category.Name'] = _t('Animals.CATEGORY','Category');
         $labels['Created_by.Surname'] = _t('Animals.CREATEDBY','Created by');
 		$labels['ProfilePic'] = _t('Animals.PROFILEPIC','Profilepic');
+		$labels['Race'] =_t('Animals.RACE','Race') ;
         return $labels;
     }
 
@@ -54,12 +63,18 @@ class Animal extends DataObject{
 		$fields->push(new NumericField('Age',_t('Animals.AGE','Age')));
 		$fields->push(new DropdownField('Gender',_t('Animals.GENDER','Gender'), array(_t('Animals.MALE','Male'),_t('Animals.FEMALE','Female'))));
 		$fields->push(new DropdownField('CategoryID',_t('Animals.CATEGORY','Category'), Category::get()->map('ID', 'Name')));
-		$fields->push(new TextareaField('Description',_t('Animals.DESCRIPTION','Description')));
+		$fields->push(new TextField('Race',_t('Animals.RACE','Race'))) ;
+		$fields->push(new HtmlEditorField('Description',_t('Animals.DESCRIPTION','Description')));
 		$fields->push(new TextField('Contact',_t('Animals.CONTACT','Contact')));
+
+
 
 		$f =new UploadField('ProfilePic',_t('Animals.PROFILEPIC','Profilepic'));
 		$f->setConfig('allowedMaxFileNumber',1);
 		//$f->getValidator()->setAllowedExtentions(array('jpg','jpeg', 'png','gif'));
+		$f->getValidator()->setAllowedExtensions(File::$app_categories['image']);
+
+
 		$fields->push($f);
 
 		//@TODO übersetzen plus evntl. bessere Lösung finden
