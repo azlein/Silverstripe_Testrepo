@@ -11,6 +11,7 @@ de:
     CREATEDBY: 'Erstellt von'
     PERMISSION_CREATE_ANIMAL: 'Der Nutzer kann Tiere eintragen'
     PROFILEPIC: 'Profilbild'
+    IMAGESUPLOAD: 'Weitere Bilder Hochladen'
     RACE: 'Rasse'
   AnimalAdmin:
     PERMISSION_CATEGORY: 'Rechte Tierverwaltung'

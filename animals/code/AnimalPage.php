@@ -47,6 +47,10 @@ class AnimalPage_Controller extends Page_Controller{
 		$category = $request->param('Category');
 		$dbEntry = Category::get()->filter('Name', $category);
 
+		if($dbEntry->Count()==0){
+			return $this->redirect($this->Link());
+		}
+
 		$tmp = array(
 			'category' => $dbEntry,
 			'activeLink'=>$category
@@ -58,7 +62,9 @@ class AnimalPage_Controller extends Page_Controller{
 		$id = $request->param('ID');
 		$category = $request->param('Category');
 		$dbEntry = Animal::get()->filter('ID',$id) ;
-
+		if($dbEntry->Count()==0){
+			return $this->redirect($this->Link());
+		}
 		$tmp = array(
 			'animal'=>$dbEntry,
 			'activeLink'=>$category

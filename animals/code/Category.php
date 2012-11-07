@@ -15,7 +15,7 @@ class Category extends DataObject{
 		'Animals'=>'Animal'
 	);
 
-    function canCreate(){
+     function canCreate(){
         if(Permission::check('CREATE_CATEGORY'))
             return true;
     }
@@ -32,8 +32,6 @@ class Category extends DataObject{
     function canView() {
         return true;
     }
-
-
 }
 class Category_Controller extends ContentController implements PermissionProvider {
 

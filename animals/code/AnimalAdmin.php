@@ -6,12 +6,16 @@
  * Time: 20:46
  * To change this template use File | Settings | File Templates.
  */
-class AnimalAdmin extends ModelAdmin{
+class AnimalAdmin extends ModelAdmin {
 	public static $managed_models = array(
 		'Animal',
 		'Category'
 	);
 	static $url_segment = 'animals';
-	static $menu_title = 'Test';
+
+	function canAdd($member=null) {
+		return false;
+	}
+
 
 }

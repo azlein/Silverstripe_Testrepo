@@ -7,7 +7,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class Animal extends DataObject{
+
+class Animal extends DataObject {
 	static $db = array(
 		'Name'=>'Varchar',
 		'Age'=>'Int',
@@ -61,7 +62,8 @@ class Animal extends DataObject{
 		$fields = new FieldList();
 		$fields->push(new TextField('Name',_t('Animals.NAME','Name')));
 		$fields->push(new NumericField('Age',_t('Animals.AGE','Age')));
-		$fields->push(new DropdownField('Gender',_t('Animals.GENDER','Gender'), array(_t('Animals.MALE','Male'),_t('Animals.FEMALE','Female'))));
+		$fields->push(new DropdownField('Gender',_t('Animals.GENDER','Gender'), array(_t('Animals.MALE','Male')=>_t('Animals.MALE','Male'),
+																					  _t('Animals.FEMALE','Female')=>_t('Animals.FEMALE','Female'))));
 		$fields->push(new DropdownField('CategoryID',_t('Animals.CATEGORY','Category'), Category::get()->map('ID', 'Name')));
 		$fields->push(new TextField('Race',_t('Animals.RACE','Race'))) ;
 		$fields->push(new HtmlEditorField('Description',_t('Animals.DESCRIPTION','Description')));
@@ -71,19 +73,12 @@ class Animal extends DataObject{
 
 		$f =new UploadField('ProfilePic',_t('Animals.PROFILEPIC','Profilepic'));
 		$f->setConfig('allowedMaxFileNumber',1);
-		//$f->getValidator()->setAllowedExtentions(array('jpg','jpeg', 'png','gif'));
 		$f->getValidator()->setAllowedExtensions(File::$app_categories['image']);
-
-
 		$fields->push($f);
 
-		//@TODO übersetzen plus evntl. bessere Lösung finden
-		$config = GridFieldConfig_RelationEditor::create();
-		$f = new GridField('OtherPics', 'Bilder der Galeries', $this->OtherPics(), $config);
-		$config->addComponent(new GridFieldBulkEditingTools());
-		$config->addComponent(new GridFieldBulkImageUpload());
-
-		$fields->push($f);
+		$f2 = new UploadField('OtherPics',_t('Animals.IMAGESUPLOAD','Images Upload'));
+		$f2->getValidator()->setAllowedExtensions(File::$app_categories['image']);
+		$fields->push($f2);
 
 		return $fields;
 	}
@@ -99,17 +94,20 @@ class Animal extends DataObject{
 	function canCreate($member=null){
 		/**if(Permission::check('CREATE_ANIMAL'))
 			return true; **/
+		//Security::permissionFailure();
+
 		return false;
 	}
 
 	function canDelete($member=null){
-		if(Member::currentUserID()==$this->Created_by()->ID)
+		if(Permission::check('CREATE_ANIMAL'))
 			return true;
 		return false;
 	}
 
 	function canEdit($member=null){
-		if(Member::currentUserID()==$this->Created_by()->ID)
+		//if(Member::currentUserID()==$this->Created_by()->ID)
+		if(Permission::check('CREATE_ANIMAL'))
 			return true;
 		return false;
 	}
@@ -117,7 +115,9 @@ class Animal extends DataObject{
 	function canView($member=null) {
 		return true;
 	}
-
+	function canAdd($member=null){
+		return false;
+	}
 }
 
 class Animal_Controller extends ContentController implements PermissionProvider {
