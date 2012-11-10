@@ -7,6 +7,7 @@
 		<% include CategoriesBar %>
 	</div>
 	<div class="span9 typography">
+        $animalSearchForm
 		$Content
 	</div>
 </div>

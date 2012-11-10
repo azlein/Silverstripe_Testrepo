@@ -8,6 +8,7 @@
 class AnimalPage extends Page{
     static $allowed_children = array();
 
+
 	function getCategories(){
 		return Category::get();
 	}
@@ -15,11 +16,12 @@ class AnimalPage extends Page{
 }
 
 class AnimalPage_Controller extends Page_Controller{
-
 	public static $url_handlers = array(
 		''=>'index',
-		'$Category//$ID' => 'handleCall',
+		'search' => 'search',
+		'$Category//$ID' => 'handleCall'
 	);
+
 
 	public function init() {
 		parent::init();
@@ -30,10 +32,22 @@ class AnimalPage_Controller extends Page_Controller{
 		Requirements::javascript('animals/css/fancybox/helpers/jquery.fancybox-thumbs.js');
 	}
 
+	public function animalSearchForm() {
+		return new AnimalSearchForm($this, 'search');
+	}
+
+	public function search(array $data, Form $form) {
+		$dbEntry = Animal::get()->filter('Name',$data['Name']);
+
+		$tmp = array(
+			'animal'=>$dbEntry
+		);
+		return $this->customise($tmp)->renderWith(array('SingleAnimal','Page'));
+	}
+
 	public function index($request){
 		return $this->renderWith(array('AnimalPage','Page'));
 	}
-
 	public function handleCall($request){
 		$id = $request->param('ID');
 		if($id == ''){
@@ -61,6 +75,7 @@ class AnimalPage_Controller extends Page_Controller{
 	public function renderAnimal($request){
 		$id = $request->param('ID');
 		$category = $request->param('Category');
+
 		$dbEntry = Animal::get()->filter('ID',$id) ;
 		if($dbEntry->Count()==0){
 			return $this->redirect($this->Link());
