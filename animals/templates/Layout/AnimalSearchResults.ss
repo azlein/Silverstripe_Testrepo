@@ -8,11 +8,12 @@
         <% include CategoriesBar %>
     </div>
     <div class="span9 typography">
-        <% control $category %>
-            <% loop Animals %>
-                <% include AnimalShort BaseLink=$Top.Top.Link %>
-            <% end_loop %>
-        <% end_control %>
+        <div class="row-fluid">
+            $animalSearchForm
+        </div>
+        <% loop results %>
+            <% include AnimalShort BaseLink=$Top.Link %>
+        <% end_loop %>
     </div>
 
 </div>

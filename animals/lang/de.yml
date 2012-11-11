@@ -19,3 +19,7 @@ de:
   Category:
     PERMISSION_CREATE_CATEGORY: 'Der Nutzer kann Kategorien anlegen'
     NAME: 'Kategorie Name'
+  AnimalSearchForm:
+    SEARCH: 'Suche'
+    EMPTY_SELECTION: 'Nichts ausgewählt'
+

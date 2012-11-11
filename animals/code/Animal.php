@@ -83,6 +83,9 @@ class Animal extends DataObject {
 		return $fields;
 	}
 
+	function getCMSValidator(){
+		return new RequiredFields('Name');
+	}
 
 	function onBeforeWrite(){
 		if($this->record['Created_byID'] == 0) {

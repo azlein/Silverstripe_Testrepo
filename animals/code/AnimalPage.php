@@ -13,8 +13,8 @@ class AnimalPage extends Page{
 		return Category::get();
 	}
 
-}
 
+}
 class AnimalPage_Controller extends Page_Controller{
 	public static $url_handlers = array(
 		''=>'index',
@@ -32,17 +32,29 @@ class AnimalPage_Controller extends Page_Controller{
 		Requirements::javascript('animals/css/fancybox/helpers/jquery.fancybox-thumbs.js');
 	}
 
+
+
 	public function animalSearchForm() {
 		return new AnimalSearchForm($this, 'search');
 	}
 
 	public function search(array $data, Form $form) {
-		$dbEntry = Animal::get()->filter('Name',$data['Name']);
+		$dbEntry = Animal::get();
+
+		$dbEntry = $dbEntry->filter(array(
+			'Name:PartialMatch' => $data['Name']
+		));
+
+		if($data['Category'] != null)
+			$dbEntry = $dbEntry->filter(array(
+				'CategoryID' => $data['Category']
+			));
+
 
 		$tmp = array(
-			'animal'=>$dbEntry
+			'results'=>$dbEntry
 		);
-		return $this->customise($tmp)->renderWith(array('SingleAnimal','Page'));
+		return $this->customise($tmp)->renderWith(array('AnimalSearchResults','Page'));
 	}
 
 	public function index($request){
