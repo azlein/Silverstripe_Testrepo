@@ -1,6 +1,5 @@
 <% if $pagination.MoreThanOnePage %>
-    <div class="row-fluid">
-        <div class="span9 pagination-centered">
+    <div class="row-fluid  pagination-centered">
                 <% if $pagination.PrevLink %>
                     <a href="$pagination.PrevLink">&lt;&lt; Prev</a> |
                 <% end_if %>
@@ -16,6 +15,5 @@
                 <% if $pagination.NextLink %>
                     <a href="$pagination.NextLink">Next &gt;&gt;</a>
                 <% end_if %>
-        </div>
     </div>
 <% end_if %>
