@@ -15,8 +15,9 @@ class Animal extends DataObject {
 		'Gender'=>'Varchar',
 		'Description'=>'HtmlText',
 		'Contact'=>'Text',
-		'Race'=>'Text'
-		//Farbe
+		'Race'=>'Text',
+		'Color'=>'Text',
+		'AgeUnit' => "i18nEnum('YEAR, MONTH , DAY')"
 	);
 
 	static $has_one = array(
@@ -46,15 +47,21 @@ class Animal extends DataObject {
 		'Created_by.Surname'
 	);
 
+	function translateAgeUnit($AgeUnit){
+		return _t("Enum.$AgeUnit");
+	}
+
     function fieldLabels($includerelations = true){
         $labels = parent::fieldLabels($includerelations);
         $labels['Name'] = _t('Animals.NAME','Name');
         $labels['Age'] = _t('Animals.AGE','Age');
+	    $labels['AgeUnit'] = _t('Animals.AGE_UNIT','Unit');
         $labels['Contact'] = _t('Animals.CONTACT','Contact');
         $labels['Category.Name'] = _t('Animals.CATEGORY','Category');
         $labels['Created_by.Surname'] = _t('Animals.CREATEDBY','Created by');
 		$labels['ProfilePic'] = _t('Animals.PROFILEPIC','Profilepic');
 		$labels['Race'] =_t('Animals.RACE','Race') ;
+		$labels['Color'] = _t('Animals.COLOR','Color');
         return $labels;
     }
 
@@ -62,14 +69,16 @@ class Animal extends DataObject {
 		$fields = new FieldList();
 		$fields->push(new TextField('Name',_t('Animals.NAME','Name')));
 		$fields->push(new NumericField('Age',_t('Animals.AGE','Age')));
+
+		$fields->push(new OptionsetField('AgeUnit',_t('Animals.AGE_UNIT','Unit'), $this->dbObject('AgeUnit')->enumValues()));
+
 		$fields->push(new DropdownField('Gender',_t('Animals.GENDER','Gender'), array(_t('Animals.MALE','Male')=>_t('Animals.MALE','Male'),
 																					  _t('Animals.FEMALE','Female')=>_t('Animals.FEMALE','Female'))));
 		$fields->push(new DropdownField('CategoryID',_t('Animals.CATEGORY','Category'), Category::get()->map('ID', 'Name')));
 		$fields->push(new TextField('Race',_t('Animals.RACE','Race'))) ;
+		$fields->push(new TextField('Color',_t('Animals.COLOR','Color')));
 		$fields->push(new HtmlEditorField('Description',_t('Animals.DESCRIPTION','Description')));
 		$fields->push(new TextField('Contact',_t('Animals.CONTACT','Contact')));
-
-
 
 		$f =new UploadField('ProfilePic',_t('Animals.PROFILEPIC','Profilepic'));
 		$f->setConfig('allowedMaxFileNumber',1);

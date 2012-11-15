@@ -2,6 +2,7 @@ de:
   Animals:
     NAME: 'Name'
     AGE: 'Alter'
+    AGE_UNIT: 'Einheit'
     DESCRIPTION: 'Beschreibung'
     CATEGORY: 'Kategorie'
     GENDER: 'Geschlecht'
@@ -13,6 +14,7 @@ de:
     PROFILEPIC: 'Profilbild'
     IMAGESUPLOAD: 'Weitere Bilder Hochladen'
     RACE: 'Rasse'
+    COLOR: 'Farbe'
   AnimalAdmin:
     PERMISSION_CATEGORY: 'Rechte Tierverwaltung'
     MENUTITLE: 'Tierverwaltung'
@@ -22,4 +24,8 @@ de:
   AnimalSearchForm:
     SEARCH: 'Suche'
     EMPTY_SELECTION: 'Nichts ausgewählt'
+  Enum:
+    YEAR: 'Jahre'
+    MONTH: 'Monate'
+    DAY: 'Tage'
 

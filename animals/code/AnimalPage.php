@@ -22,6 +22,7 @@ class AnimalPage_Controller extends Page_Controller{
 		'$Category//$ID' => 'handleCall'
 	);
 
+	private $searchForm;
 
 	public function init() {
 		parent::init();
@@ -36,12 +37,13 @@ class AnimalPage_Controller extends Page_Controller{
 
 	public function animalSearchForm() {
 		return new AnimalSearchForm($this, 'search');
+
 	}
 
 	public function search(array $data, Form $form) {
-		$dbEntry = Animal::get();
 
-		$dbEntry = $dbEntry->filter(array(
+
+		/*$dbEntry = $dbEntry->filter(array(
 			'Name:PartialMatch' => $data['Name']
 		));
 
@@ -49,10 +51,24 @@ class AnimalPage_Controller extends Page_Controller{
 			$dbEntry = $dbEntry->filter(array(
 				'CategoryID' => $data['Category']
 			));
+		if($data['Race']!= null)
+			$dbEntry = $dbEntry->filter(array(
+				'Race:PartialMatch'=>$data['Race']
+			));
 
+		if($data['Color']!=null)
+			$dbEntry = $dbEntry->filter(array(
+				'Color'=>$data['Color']
+			));
+        */
+		if (isset($data['Hidden']))
+			Session::set('Name', $data['Name']);
 
 		$tmp = array(
-			'results'=>$dbEntry
+			'results'=>new PaginatedList(Animal::get()->filter(array(
+					'Name:PartialMatch' => Session::get('Name')
+				))
+			, $data)
 		);
 		return $this->customise($tmp)->renderWith(array('AnimalSearchResults','Page'));
 	}

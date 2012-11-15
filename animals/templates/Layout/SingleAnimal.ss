@@ -14,9 +14,10 @@
                     </div>
                     <div class="span5">
                         <h2>$Name</h2>
-                        <p><b>Alter:</b> $Age</p>
+                        <p><b>Alter:</b> $Age $translateAgeUnit($AgeUnit)</p>
                         <p><b>Geschlecht:</b> $Gender</p>
-                        <p><b>Rasse:</b>$Race</p>
+                        <p><b>Rasse:</b> $Race</p>
+                        <p><b>Farbe:</b> $Color</p>
                         <p><b>Kontakt:</b> $Contact</p>
 
                     </div>
