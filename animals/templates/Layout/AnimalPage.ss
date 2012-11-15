@@ -7,8 +7,14 @@
 		<% include CategoriesBar %>
 	</div>
 	<div class="span9 typography">
-        $animalSearchForm
-		$Content
+        <div class="row-fluid">
+            $Content
+        </div>
+        <div class="row-fluid animal">
+            <div  class="span8">
+                $animalSearchForm
+            </div>
+        </div>
 	</div>
 </div>
 

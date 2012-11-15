@@ -8,20 +8,28 @@
 class AnimalSearchForm extends Form{
 
 	public function __construct($controller,$name) {
+		$this->addExtraClass('form-horizontal');
+
 		$fields = new FieldList();
 		$fields->push(new HiddenField('Hidden', 'Hidden', '1'));
 		$fields->push(new TextField('Name', _t('Animals.NAME','Name'), Session::get('Name')));
 
-		$category =	new DropdownField('Category', _t('Animals.CATEGORY'),Category::get()->map('ID', 'Name'));
+		$category =	new DropdownField('Category', _t('Animals.CATEGORY'),Category::get()->map('ID', 'Name'),Session::get('Category'));
 		$category->setEmptyString(_t('AnimalSearchForm.EMPTY_SELECTION', 'No selection'));
 		$category->setHasEmptyDefault(true);
 		$fields->push($category);
 
-		$fields->push(new TextField('Race',_t('Animals.RACE','Race')));
+		$fields->push(new TextField('Race',_t('Animals.RACE','Race'),Session::get('Race')));
 
 		$colorArray = Animal::get()->map('Color', 'Color')->toArray();
+
+		foreach($colorArray as $key=>$value){
+			unset($colorArray[$key]);
+			$colorArray[strtolower($key)] = strtolower($value);
+		}
+
 		$colorArray = array_unique($colorArray);
-		$color = new DropdownField('Color',_t('Animals.COLOR','Color'),$colorArray);
+		$color = new DropdownField('Color',_t('Animals.COLOR','Color'),$colorArray,Session::get('Color'));
 		$color->setEmptyString(_t('AnimalSearchForm.EMPTY_SELECTION','No selection'));
 		$color->setHasEmptyDefault(true);
 		$fields->push($color);
@@ -33,4 +41,9 @@ class AnimalSearchForm extends Form{
 
 		parent::__construct($controller, $name, $fields, $actions);
 	}
+	public function forTemplate(){
+		return $this->renderWith(array('AnimalSearchForm','Form'));
+	}
+
+
 }

@@ -41,8 +41,6 @@ class AnimalPage_Controller extends Page_Controller{
 	}
 
 	public function search(array $data, Form $form) {
-
-
 		/*$dbEntry = $dbEntry->filter(array(
 			'Name:PartialMatch' => $data['Name']
 		));
@@ -61,14 +59,28 @@ class AnimalPage_Controller extends Page_Controller{
 				'Color'=>$data['Color']
 			));
         */
-		if (isset($data['Hidden']))
+		if (isset($data['Hidden'])) {
 			Session::set('Name', $data['Name']);
+			Session::set('Category',$data['Category']);
+			Session::set('Race',$data['Race']);
+			Session::set('Color',$data['Color']);
+		}
+
+
+		$filter = array();
+		$filter['Name:StartsWith'] = Session::get('Name');
+
+		if(Session::get('Category')!=null)
+			$filter['CategoryID'] = Session::get('Category');
+
+		if(Session::get('Race')!=null)
+			$filter['Race:PartialMatch'] = Session::get('Race');
+
+		if(Session::get('Color')!=null)
+			$filter['Color:PartialMatch'] = Session::get('Color');
 
 		$tmp = array(
-			'results'=>new PaginatedList(Animal::get()->filter(array(
-					'Name:PartialMatch' => Session::get('Name')
-				))
-			, $data)
+			'pagination'=>new PaginatedList(Animal::get()->filter($filter)->sort('Name') , $this->request)
 		);
 		return $this->customise($tmp)->renderWith(array('AnimalSearchResults','Page'));
 	}
@@ -94,7 +106,7 @@ class AnimalPage_Controller extends Page_Controller{
 		}
 
 		$tmp = array(
-			'category' => $dbEntry,
+			'pagination' => new PaginatedList($dbEntry->first()->Animals()->sort('Name'),$this->request),
 			'activeLink'=>$category
 		);
 		return $this->customise($tmp)->renderWith(array('AnimalCategory','Page'));

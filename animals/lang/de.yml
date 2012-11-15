@@ -24,6 +24,7 @@ de:
   AnimalSearchForm:
     SEARCH: 'Suche'
     EMPTY_SELECTION: 'Nichts ausgewählt'
+    LEGEND: 'Tiersuche'
   Enum:
     YEAR: 'Jahre'
     MONTH: 'Monate'
