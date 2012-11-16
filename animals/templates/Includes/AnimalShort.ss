@@ -1,5 +1,5 @@
-<div class="row-fluid animal">
-	<div class="span10 ">
+<div class="row-fluid ">
+	<div class="span10 animal ">
 		<div class="span3">
 			<img src="$ProfilePic.setWidth(150).URL"/>
 		</div>

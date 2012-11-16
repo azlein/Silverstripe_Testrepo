@@ -8,8 +8,8 @@
         <% include CategoriesBar %>
     </div>
     <div class="span9 typography">
-        <div class="row-fluid animal">
-            <div class="span8">$animalSearchForm</div>
+        <div class="row">
+           $animalSearchForm
         </div>
 
         <% loop $pagination %>

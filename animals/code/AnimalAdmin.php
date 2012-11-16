@@ -11,10 +11,14 @@ class AnimalAdmin extends ModelAdmin {
 		'Animal',
 		'Category'
 	);
+	static $model_importers = array();
 	static $url_segment = 'animals';
 
-	function canAdd($member=null) {
-		return false;
+	public function getManagedModelTabs(){
+		$tabs = parent::getManagedModelTabs();
+		if (!Permission::check('MANAGE_CATEGORY'))
+			$tabs->remove($tabs->last());
+		return $tabs;
 	}
 
 

@@ -8,7 +8,7 @@
 class AnimalSearchForm extends Form{
 
 	public function __construct($controller,$name) {
-		$this->addExtraClass('form-horizontal');
+		$this->addExtraClass('form-horizontal well span7 pull-center offset1');
 
 		$fields = new FieldList();
 		$fields->push(new HiddenField('Hidden', 'Hidden', '1'));

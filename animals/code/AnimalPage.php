@@ -41,24 +41,6 @@ class AnimalPage_Controller extends Page_Controller{
 	}
 
 	public function search(array $data, Form $form) {
-		/*$dbEntry = $dbEntry->filter(array(
-			'Name:PartialMatch' => $data['Name']
-		));
-
-		if($data['Category'] != null)
-			$dbEntry = $dbEntry->filter(array(
-				'CategoryID' => $data['Category']
-			));
-		if($data['Race']!= null)
-			$dbEntry = $dbEntry->filter(array(
-				'Race:PartialMatch'=>$data['Race']
-			));
-
-		if($data['Color']!=null)
-			$dbEntry = $dbEntry->filter(array(
-				'Color'=>$data['Color']
-			));
-        */
 		if (isset($data['Hidden'])) {
 			Session::set('Name', $data['Name']);
 			Session::set('Category',$data['Category']);

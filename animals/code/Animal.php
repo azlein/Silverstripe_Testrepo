@@ -31,11 +31,13 @@ class Animal extends DataObject {
 	);
 
 	static $summary_fields = array(
+		'ID'=>'ID',
 		'Name' => 'Animal Name',
 		'Age' => 'Age',
 		'Contact' => 'Contact',
 		'Category.Name' => 'Category',
 		'Race'=>'Race' ,
+		'Color'=>'Color',
 		'Created_by.Surname' => 'Created by'
 	);
 
@@ -51,9 +53,21 @@ class Animal extends DataObject {
 		return _t("Enum.$AgeUnit");
 	}
 
+	function i18n_singular_name() {
+		$name = $this->singular_name();
+		return _t('Animals.SINGULAR_NAME', $name);
+	}
+
+	function i18n_plural_name() {
+		$name = $this->plural_name();
+		return _t('Animals.PLURAL_NAME',$name);
+	}
+
     function fieldLabels($includerelations = true){
         $labels = parent::fieldLabels($includerelations);
-        $labels['Name'] = _t('Animals.NAME','Name');
+		$labels['singular_name'] ='Tiere';
+
+		$labels['Name'] = _t('Animals.NAME','Name');
         $labels['Age'] = _t('Animals.AGE','Age');
 	    $labels['AgeUnit'] = _t('Animals.AGE_UNIT','Unit');
         $labels['Contact'] = _t('Animals.CONTACT','Contact');
@@ -66,7 +80,7 @@ class Animal extends DataObject {
     }
 
 	function getCMSFields() {
-		$fields = new FieldList();
+		$fields =new FieldList();
 		$fields->push(new TextField('Name',_t('Animals.NAME','Name')));
 		$fields->push(new NumericField('Age',_t('Animals.AGE','Age')));
 
@@ -103,23 +117,28 @@ class Animal extends DataObject {
 		parent::onBeforeWrite();
 	}
 
+	function validate() {
+		$result = parent::validate();
+		if(!Permission::check('MANAGE_ANIMAL'))
+			$result->error(_t('Animals.NO_PERMISSION', "You don't have the rights to do so"));
+		return $result;
+	}
+
 	function canCreate($member=null){
-		/**if(Permission::check('CREATE_ANIMAL'))
-			return true; **/
-		//Security::permissionFailure();
+		if(Permission::check('MANAGE_ANIMAL'))
+			return true;
 
 		return false;
 	}
 
 	function canDelete($member=null){
-		if(Permission::check('CREATE_ANIMAL'))
+		if(Permission::check('MANAGE_ANIMAL'))
 			return true;
 		return false;
 	}
 
 	function canEdit($member=null){
-		//if(Member::currentUserID()==$this->Created_by()->ID)
-		if(Permission::check('CREATE_ANIMAL'))
+		if(Permission::check('MANAGE_ANIMAL'))
 			return true;
 		return false;
 	}
@@ -127,9 +146,7 @@ class Animal extends DataObject {
 	function canView($member=null) {
 		return true;
 	}
-	function canAdd($member=null){
-		return false;
-	}
+
 }
 
 class Animal_Controller extends ContentController implements PermissionProvider {
@@ -142,10 +159,10 @@ class Animal_Controller extends ContentController implements PermissionProvider 
 	 */
 	function providePermissions(){
 		return array(
-			'CREATE_ANIMAL'=> array(
-				'name' => _t('Animals.PERMISSION_CREATE_ANIMAL', 'User can create an animal'),
+			'MANAGE_ANIMAL'=> array(
+				'name' => _t('Animals.PERMISSION_MANAGE_ANIMAL', 'User can manage an animal'),
 				'category' => _t('AnimalAdmin.PERMISSION_CATEGORY','AnimalAdmin Admin Rights'),
-				'help' => _t('Animals.PERMISSION_CREATE_ANIMAL', 'User can create an animal'),
+				'help' => _t('Animals.PERMISSION_MANAGE_ANIMAL', 'User can manage an animal'),
 				'sort' => 0
 			)
 		);

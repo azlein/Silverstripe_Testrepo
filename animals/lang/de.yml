@@ -10,17 +10,23 @@ de:
     MALE: 'Männlich'
     FEMALE: 'Weiblich'
     CREATEDBY: 'Erstellt von'
-    PERMISSION_CREATE_ANIMAL: 'Der Nutzer kann Tiere eintragen'
+    PERMISSION_MANAGE_ANIMAL: 'Der Nutzer kann Tiere verwalten'
     PROFILEPIC: 'Profilbild'
     IMAGESUPLOAD: 'Weitere Bilder Hochladen'
     RACE: 'Rasse'
     COLOR: 'Farbe'
+    NO_PERMISSION: 'Sie haben nicht die benötigten Rechte'
+    SINGULAR_NAME: 'Tier'
+    PLURAL_NAME: 'Tiere'
   AnimalAdmin:
     PERMISSION_CATEGORY: 'Rechte Tierverwaltung'
     MENUTITLE: 'Tierverwaltung'
   Category:
-    PERMISSION_CREATE_CATEGORY: 'Der Nutzer kann Kategorien anlegen'
+    PERMISSION_MANAGE_CATEGORY: 'Der Nutzer kann Kategorien verwalten'
+    NO_PERMISSION: 'Sie haben nicht die benötigten Rechte'
     NAME: 'Kategorie Name'
+    SINGULAR_NAME: 'Kategorie'
+    PLURAL_NAME: 'Kategories'
   AnimalSearchForm:
     SEARCH: 'Suche'
     EMPTY_SELECTION: 'Nichts ausgewählt'
@@ -29,4 +35,3 @@ de:
     YEAR: 'Jahre'
     MONTH: 'Monate'
     DAY: 'Tage'
-

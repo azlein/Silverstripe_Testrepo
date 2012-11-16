@@ -10,10 +10,8 @@
         <div class="row-fluid">
             $Content
         </div>
-        <div class="row-fluid animal">
-            <div  class="span8">
+        <div class="row">
                 $animalSearchForm
-            </div>
         </div>
 	</div>
 </div>
