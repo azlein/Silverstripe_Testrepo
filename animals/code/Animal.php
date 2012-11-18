@@ -42,10 +42,19 @@ class Animal extends DataObject {
 	);
 
 	static $searchable_fields = array(
-		'Name',
-		'Category.Name',
+		'Name' => array(
+			'field' => 'TextField',
+			'filter' => 'PartialMatchFilter',
+		),
+		'Category.Name'=>array(
+			'field'=>'DropDownField',
+		     'filter'=>'PartialMatchFilter'
+		),
 		'Contact',
-		'Race',
+		'Race' => array(
+			'field' => 'TextField',
+			'filter' => 'PartialMatchFilter',
+		),
 		'Created_by.Surname'
 	);
 
@@ -88,7 +97,12 @@ class Animal extends DataObject {
 
 		$fields->push(new DropdownField('Gender',_t('Animals.GENDER','Gender'), array(_t('Animals.MALE','Male')=>_t('Animals.MALE','Male'),
 																					  _t('Animals.FEMALE','Female')=>_t('Animals.FEMALE','Female'))));
-		$fields->push(new DropdownField('CategoryID',_t('Animals.CATEGORY','Category'), Category::get()->map('ID', 'Name')));
+
+		$f =  new DropdownField('CategoryID',_t('Animals.CATEGORY','Category'), Category::get()->map('ID', 'Name'));
+		$f->setEmptyString(_t('AnimalSearchForm.EMPTY_SELECTION', 'No selection'));
+		$f->setHasEmptyDefault(true);
+		$fields->push($f);
+
 		$fields->push(new TextField('Race',_t('Animals.RACE','Race'))) ;
 		$fields->push(new TextField('Color',_t('Animals.COLOR','Color')));
 		$fields->push(new HtmlEditorField('Description',_t('Animals.DESCRIPTION','Description')));
@@ -106,8 +120,9 @@ class Animal extends DataObject {
 		return $fields;
 	}
 
+	//TextField für Name,Des,Race nicht leer sein
 	function getCMSValidator(){
-		return new RequiredFields('Name');
+		return new RequiredFields('Name','Description','Race');
 	}
 
 	function onBeforeWrite(){
