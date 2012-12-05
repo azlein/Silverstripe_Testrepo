@@ -22,8 +22,6 @@ class AnimalPage_Controller extends Page_Controller{
 		'$Category//$ID' => 'handleCall'
 	);
 
-	private $searchForm;
-
 	public function init() {
 		parent::init();
 		Requirements::css('animals/css/animals.css');

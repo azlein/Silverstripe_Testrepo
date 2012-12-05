@@ -13,6 +13,7 @@ $databaseConfig = array(
 	"path" => '',
 );
 
+
 MySQLDatabase::set_connection_charset('utf8');
 
 // Set the current theme. More themes can be downloaded from

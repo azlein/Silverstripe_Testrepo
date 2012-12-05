@@ -14,7 +14,7 @@
                     </div>
                     <div class="span5">
                         <h2>$Name</h2>
-                        <p><b>Alter:</b> $Age $translateAgeUnit($AgeUnit)</p>
+                        <p><b>Geburtsdatum:</b> $BirthDate.Format('d.m.y')  ( $getAge )</p>
                         <p><b>Geschlecht:</b> $Gender</p>
                         <p><b>Rasse:</b> $Race</p>
                         <p><b>Farbe:</b> $Color</p>

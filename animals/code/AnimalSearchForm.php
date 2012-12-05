@@ -35,15 +35,20 @@ class AnimalSearchForm extends Form{
 		$fields->push($color);
 
 
+		$age = new DropdownField('Age',_t('Animals.AGE','Age'));
+		$age->setEmptyString(_t('AnimalSearchForm.EMPTY_SELECTION'),'No selction');
+		$age->setHasEmptyDefault(true);
+		$fields->push($age);
+
 		$actions = new FieldList(
 			FormAction::create("search")->setTitle(_t('AnimalSearchForm.SEARCH','Search'))->addExtraClass('btn btn-primary')
 		);
 
 		parent::__construct($controller, $name, $fields, $actions);
 	}
+
 	public function forTemplate(){
 		return $this->renderWith(array('AnimalSearchForm','Form'));
 	}
-
 
 }

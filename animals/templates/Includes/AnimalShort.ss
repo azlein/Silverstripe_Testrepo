@@ -6,7 +6,7 @@
 		<div class="span8">
             <h2 style="padding-top: 5px;">$Name</h2>
 		    <div class="span4">
-				<p><b>Alter: </b>$Age $translateAgeUnit($AgeUnit)</p>
+				<p><b>Alter: </b>$getAge</p>
 				<p><b>Farbe: </b>$Color</p>
                 <p><b>Rasse: </b>$Race</p>
             </div>
